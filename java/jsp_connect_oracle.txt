@@ -1,0 +1,31 @@
+<!-- //
+## I installed Oracle 10g/11g express, password for system is 'system'
+## sqlplus
+## connect as 'system' and the password is 'system'
+## CREATE USER goll IDENTIFIED BY goll DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
+## GRANT CONNECT, RESOURCE, UNLIMITED TABLESPACE to goll;
+## use Oracle SQL Developer to create the table called 'friends'
+## if using sqlplus to insert, type 'commit' to save
+
+this uses  'System.out.println' to print the output
+it will show up in console in Eclipse, but will not show on the browser ;)
+
+-->
+<%@ page import="java.sql.*" %>
+<%
+ 
+Class.forName("oracle.jdbc.driver.OracleDriver");
+Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","goll","goll");
+	
+Statement st=conn.createStatement();
+
+ResultSet rs=st.executeQuery("select * from goll.table1");
+
+while(rs.next())
+{System.out.println(rs.getString(3));
+} 
+
+	
+st.close();
+conn.close();
+%>

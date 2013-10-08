@@ -1,0 +1,66 @@
+
+copy 'mysql-connector-java-5.1.22-bin.jar' to WEB-INF/lib
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import = "java.sql.*" %>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ 
+   
+<%
+ 
+Connection conn = null;
+String url = "jdbc:mysql://localhost/test";
+String userName = "root";
+String password = "root";
+
+try {
+Class.forName("org.gjt.mm.mysql.Driver").newInstance();
+conn = DriverManager.getConnection(url,userName,password);
+out.println("Connected<br/>");
+
+try {
+Statement s = conn.createStatement();
+s.executeQuery("SELECT * FROM amigos");
+ResultSet rs = s.getResultSet();
+int count = 0;
+while(rs.next()) {
+int id = rs.getInt(1);
+String firstName = rs.getString(2);
+out.println(id + ": " + firstName + "<br/>");
+count++;
+}
+}
+catch(Exception e) {
+out.println("query failed<br/>");
+}
+
+}
+catch(Exception e) {
+out.println("Cannot connect to server<br/>");
+}
+finally {
+if(conn != null) {
+try {
+conn.close();
+out.println("Disconnected</br>");
+}
+catch (Exception e) {
+//ignor close errors
+}
+}
+}
+
+%>	
+ 
+
+</body>
+</html>
