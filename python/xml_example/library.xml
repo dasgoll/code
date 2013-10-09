@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<catalog>
+
+
+<book>
+	<title>Learn Django</title>
+	<author>Jalal Araidah</author>
+	<category>Programming</category>
+</book> 
+<book>
+	<title>How to cook Mansaf</title>
+	<author>Lia Abady</author>
+	<catalog>Cuisine</catalog>
+</book>
+</catalog>
